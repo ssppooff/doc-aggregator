@@ -1,4 +1,4 @@
-<html lang="en" th:fragment="page (title, body)">
+<html lang="en" th:fragment="page (title, body)" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title th:text="${title}">Page template</title>
     <meta charset="utf-8">
@@ -10,7 +10,30 @@
     <!-- Custom styles -->
     <link rel="stylesheet" href="/css/styles.css">
 </head>
-<body th:insert="${body}"><!-- TODO: Navigation -->
+<body>
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/}">Document Aggregator</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav me-auto mb-2 mb-lg-0">
+                <!--/*@thymesVar id="navigationItems" type="java.util.List"*/-->
+                <a th:each="item : ${navigationItems}" class="nav-link" th:classappend="${item.active ? 'active' : null}" th:aria-current="${item.active ? 'page' : null}"
+                   th:href="${item.uri}" th:text="${item.title}"></a>
+            </div>
+            <form th:action="@{/logout}" class="d-flex mb-0" sec:authorize="isAuthenticated()">
+                <button class="btn btn-secondary" type="submit">Logout</button>
+            </form>
+            <form th:action="@{/login}" class="d-flex mb-0" sec:authorize="!isAuthenticated()">
+                <button class="btn btn-secondary" type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+</nav>
+<div th:replace="${body}"></div>
 
 <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>

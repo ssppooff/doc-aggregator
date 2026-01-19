@@ -52,7 +52,10 @@ class SecurityConfiguration {
                 authorize(AdminController.REQUEST_MAPPING + "/**", hasRole("ADMIN"))
                 authorize(anyRequest, denyAll)
             }
-            oauth2Login {}
+            oauth2Login { }
+            logout {
+                logoutSuccessUrl = "/docs"
+            }
         }
         return http.build()
     }
