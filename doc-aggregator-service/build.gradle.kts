@@ -46,7 +46,7 @@ dependencies {
 
     // WebJars dependencies
     runtimeOnly("org.webjars:bootstrap:5.3.5")
-    runtimeOnly("org.webjars.npm:bootstrap-icons:1.11.3")
+    runtimeOnly("org.webjars.npm:bootstrap-icons:1.13.1")
     runtimeOnly("org.webjars:webjars-locator-lite")
 
     // Project dependencies

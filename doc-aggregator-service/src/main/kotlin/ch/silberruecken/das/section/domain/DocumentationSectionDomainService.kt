@@ -1,5 +1,6 @@
 package ch.silberruecken.das.section.domain
 
+import ch.silberruecken.das.documentation.DocumentationDeleted
 import ch.silberruecken.das.documentation.DocumentationId
 import ch.silberruecken.das.documentation.DocumentationUpdated
 import ch.silberruecken.das.section.DocumentationSection
@@ -28,6 +29,13 @@ class DocumentationSectionDomainService(private val restClient: RestClient, priv
         val sections = document.toSections(documentation.id)
         sectionIndexRepository.deleteByDocumentationId(documentation.id)
         sectionIndexRepository.saveAll(sections)
+    }
+
+    @ApplicationModuleListener
+    fun deleteSections(event: DocumentationDeleted) {
+        require(event.documentation.id != null) { "Sections can only be deleted for persisted documentations" }
+        logger.info("Documentation ${event.documentation.uri} has been deleted. Index is updated...")
+        sectionIndexRepository.deleteByDocumentationId(event.documentation.id)
     }
 
     private fun Document.toSections(documentationId: DocumentationId) = HtmlParser.sectionsByIds(body())

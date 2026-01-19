@@ -31,6 +31,11 @@ data class Documentation(
         eventPublisher.publishEvent(DocumentationUpdated(doc))
         return doc
     }
+
+    fun delete(documentationRepository: DocumentationRepository, eventPublisher: ApplicationEventPublisher) {
+        documentationRepository.delete(this)
+        eventPublisher.publishEvent(DocumentationDeleted(this))
+    }
 }
 
 enum class DocumentationType { API, ARCHITECTURE } // TODO: List registered documentations with type, make them removable

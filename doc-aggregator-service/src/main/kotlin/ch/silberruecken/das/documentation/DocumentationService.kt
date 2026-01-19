@@ -20,6 +20,12 @@ class DocumentationService(
     }
 
     @PreAuthorize("hasRole('ADMIN')")
+    @Transactional
+    fun delete(id: String) {
+        documentationRepository.findByIdOrNull(id)?.delete(documentationRepository, eventPublisher)
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
     fun findAll(): List<Documentation> {
         return documentationRepository.findAll()
     }

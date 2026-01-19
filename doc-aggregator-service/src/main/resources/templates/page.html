@@ -3,16 +3,15 @@
     <title th:text="${title}">Page template</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap CSS from WebJars -->
+
     <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/webjars/bootstrap-icons/font/bootstrap-icons.css}" rel="stylesheet">
+
     <!-- Custom styles -->
     <link rel="stylesheet" href="/css/styles.css">
 </head>
-<body th:insert="${body}">
+<body th:insert="${body}"><!-- TODO: Navigation -->
 
-<!-- Bootstrap Bundle with Popper from WebJars -->
 <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<!-- Bootstrap Icons from WebJars -->
-<link th:href="@{/webjars/bootstrap-icons/font/bootstrap-icons.css}" rel="stylesheet">
 </body>
 </html>

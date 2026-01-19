@@ -6,6 +6,7 @@ import ch.silberruecken.das.section.elasticsearch.SectionIndexRepository
 import org.springframework.data.elasticsearch.core.SearchHit
 import org.springframework.stereotype.Service
 import org.springframework.web.util.UriComponentsBuilder
+import java.net.URI
 
 // TODO: Security
 @Service
@@ -35,6 +36,6 @@ data class DocumentationWithSection(
     private val section: DocumentationSection,
     val summary: String
 ) {
-    fun getUri() = UriComponentsBuilder.fromUri(documentation.uri).fragment(section.markup.elementId).build().toUri()
+    fun getUri(): URI = UriComponentsBuilder.fromUri(documentation.uri).fragment(section.markup.elementId).build().toUri()
     fun getTitle() = documentation.service
 }
