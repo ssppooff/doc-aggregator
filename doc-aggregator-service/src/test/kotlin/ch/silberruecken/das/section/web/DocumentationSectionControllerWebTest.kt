@@ -2,6 +2,7 @@ package ch.silberruecken.das.section.web
 
 import ch.silberruecken.das.section.DocumentationSectionService
 import ch.silberruecken.das.section.DocumentationWithSection
+import ch.silberruecken.das.sh.OAuth2TestConfiguration
 import org.assertj.core.api.Assertions.assertThat
 import org.htmlunit.WebClient
 import org.htmlunit.html.HtmlAnchor
@@ -23,7 +24,7 @@ import java.net.URI
 
 @WebMvcTest(controllers = [DocumentationSectionController::class])
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
-@Import(DummyCsrfConfiguration::class)
+@Import(DummyCsrfConfiguration::class, OAuth2TestConfiguration::class)
 class DocumentationSectionControllerWebTest(@MockitoBean private val documentationSectionService: DocumentationSectionService) {
     private lateinit var webClient: WebClient
 

@@ -3,6 +3,7 @@ package ch.silberruecken.das.section
 import ch.silberruecken.das.TestcontainersConfiguration
 import ch.silberruecken.das.documentation.*
 import ch.silberruecken.das.section.elasticsearch.SectionIndexRepository
+import ch.silberruecken.das.sh.OAuth2TestConfiguration
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock.aResponse
 import com.github.tomakehurst.wiremock.client.WireMock.get
@@ -20,7 +21,7 @@ import org.wiremock.spring.InjectWireMock
 import java.net.URI
 
 @ApplicationModuleTest
-@Import(TestcontainersConfiguration::class)
+@Import(TestcontainersConfiguration::class, OAuth2TestConfiguration::class)
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @EnableWireMock(ConfigureWireMock())
 class SectionModuleTest(private val sectionIndexRepository: SectionIndexRepository, @MockitoBean private val documentationService: DocumentationService) {
